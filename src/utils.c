@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 14:26:11 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/26 17:49:39 by rsham            ###   ########.fr       */
+/*   Created: 2025/01/26 12:49:06 by rsham             #+#    #+#             */
+/*   Updated: 2025/01/26 19:03:43 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <sys/time.h>
 
-int main(int argc, char **argv)
+uint64_t   get_current_time(void)
 {
-    t_philo *philo;
-
-    if (argc == 5 || argc == 6)
+    struct timeval  tv;
+    
+    if (gettimeofday(&tv, NULL) == -1)
     {
-        philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-        init_args(philo, argv);
-        init_forks(philo);
-        init_philo(philo);
-        create_philos(philo);
+        write(2, "gettimeofday() fallied\n", 23);
+        return (-1);
     }
+    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

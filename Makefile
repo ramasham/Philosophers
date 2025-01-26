@@ -5,7 +5,7 @@ LIBFT_DIR = ./libft
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./include
 
-SRCS = src/philo.c
+SRCS = src/philo.c src/actions.c src/init.c src/utils.c
 
 OBJS = $(SRCS:.c=.o)
 
