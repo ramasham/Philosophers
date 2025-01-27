@@ -1,27 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   moniter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 14:26:11 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/27 16:57:27 by rsham            ###   ########.fr       */
+/*   Created: 2025/01/27 12:37:32 by rsham             #+#    #+#             */
+/*   Updated: 2025/01/27 12:39:22 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
-{
-    t_philo philos[PHILO_MAX];
-    t_program   *program;
-    if (argc == 5 || argc == 6)
-    {
-        init_args(philos, argv);
-        init_program(program, philos);
-        init_forks(philos);
-        init_philo(philos, program);
-        create_philos(philos);
-    }
-}
+// supervisor 
+    //1. check is dead
+    //2. check if the philos ate all meals
