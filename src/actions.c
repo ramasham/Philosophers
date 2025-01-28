@@ -6,7 +6,7 @@
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:11:25 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/27 13:29:00 by rsham            ###   ########.fr       */
+/*   Updated: 2025/01/28 17:38:04 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void    thinking(t_philo *philo)
 void    sleeping(t_philo *philo)
 {
     printf("philo %d is sleeping\n", philo->id);
+    ft_usleep(philo->time_to_sleep);
 }
 
 void    eating(t_philo *philo)
@@ -38,20 +39,17 @@ void    eating(t_philo *philo)
     pthread_mutex_unlock(philo->right_fork);
     pthread_mutex_unlock(philo->left_fork);
 }
-int is_dead(t_philo *philo)
-{
-    if (get_current_time() - philo->least_meal >= philo->time_to_die)
-        return (pthread_mutex_unlock(philo));
-}
+
+
+
 void    *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
-    while (1)
+    while (dead_indicator(philo))
     {
         thinking(philo);
         eating(philo);
         sleeping(philo);
     }
+    return (arg);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:10:43 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/27 16:55:22 by rsham            ###   ########.fr       */
+/*   Updated: 2025/01/28 18:34:21 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void    init_args(t_philo *status, char **argv)
     status->time_to_eat = ft_atoi(argv[3]);
     status->time_to_sleep = ft_atoi(argv[4]);
     if (argv[5])
-        status->num_philo_eat = ft_atoi(argv[5]);
+        status->num_times_eat = ft_atoi(argv[5]);
+    else
+        status->num_times_eat = 0;
 }
 
 void    init_forks(t_philo *philo)
@@ -47,6 +49,7 @@ void    init_philo(t_philo *philo, t_program *program)
     {
         philo[i].id = i + 1;
         philo[i].eating = 0;
+        philo[i].meals_eaten = 0;
         philo[i].start_time = get_current_time();
         philo[i].least_meal = get_current_time();
         philo[i].left_fork = &philo->forks[i];
@@ -54,6 +57,7 @@ void    init_philo(t_philo *philo, t_program *program)
         philo[i].dead = &program->dead_flag;
         philo[i].meal_lock = &program->meal_lock;
         philo[i].write_lock = &program->write_lock;
+        philo[i].dead_lock = &program->dead_lock;
         i++;
     }
 }
@@ -62,6 +66,7 @@ void    init_program(t_program *program, t_philo *philos)
 {
     program->dead_flag = 0;
     program->philo = philos;
-    pthread_mutex_int(program->meal_lock, NULL);
-    pthread_mutex_int(program->write_lock, NULL);
+    pthread_mutex_init(&program->meal_lock, NULL);
+    pthread_mutex_init(&program->write_lock, NULL);
+    pthread_mutex_init(&program->dead_lock, NULL);
 }
