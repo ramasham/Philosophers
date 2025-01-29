@@ -3,9 +3,10 @@ NAME = philo
 LIBFT_DIR = ./libft
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./include
+CFLAGS = -Wall -Wextra -Werror -I./include -g
 
-SRCS = src/philo.c src/actions.c src/init.c src/utils.c src/create.c src/moniter.c 
+SRCS = src/philo.c src/actions.c src/init.c src/utils.c src/threads.c src/death.c \
+	src/get_time.c
 
 OBJS = $(SRCS:.c=.o)
 

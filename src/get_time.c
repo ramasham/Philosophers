@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 14:26:11 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/29 18:08:35 by rsham            ###   ########.fr       */
+/*   Created: 2025/01/29 17:47:08 by rsham             #+#    #+#             */
+/*   Updated: 2025/01/29 18:37:28 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+size_t   get_current_time(void)
 {
-    if (argc != 5 && argc != 6)
-    {
-        write(2, "you should enter 5 or 6 arguments\n", 34);
-        return (1);
-    }
+    struct timeval  time;
+    
+    gettimeofday(&time, NULL);
+    return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 
-    t_philo     philos[PHILO_MAX];
-    t_program   program;
+int ft_usleep(t_philo *philo, size_t ms)
+{
+    size_t  start;
 
-    if (argc == 5 || argc == 6)
+    start = get_current_time();
+    while((get_current_time() - start) < ms)
     {
-        init_args(&program, argv);
-        init_program(&program, philos);
-        init_forks(&program);
-        init_philo(philos, &program);
-        create_philo(&program, program.forks);
+        if(is_dead(philo))
+            break;
     }
     return (0);
 }
