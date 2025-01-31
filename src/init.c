@@ -6,7 +6,7 @@
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:10:43 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/29 18:10:47 by rsham            ###   ########.fr       */
+/*   Updated: 2025/01/31 20:08:25 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void    init_philo(t_philo *philo, t_program *program)
     int i;
 
     i = 0;
+    program->philo = philo;
     while (i < program->num_of_philo)
     {
         philo[i].num_times_eat = program->num_times_eat;
@@ -55,7 +56,6 @@ void    init_philo(t_philo *philo, t_program *program)
         philo[i].eating = 0;
         philo[i].meals_eaten = 0;
         philo[i].start_time = get_current_time();
-        // printf("start time is : %zu\n", philo->start_time);
         philo[i].last_meal = get_current_time();
         philo[i].left_fork = &program->forks[i];
         philo[i].right_fork = &program->forks[(i + 1) % program->num_of_philo];
@@ -67,11 +67,4 @@ void    init_philo(t_philo *philo, t_program *program)
     }
 }
 
-void    init_program(t_program *program, t_philo *philo)
-{
-    program->philo = philo;
-    pthread_mutex_init(&program->meal_lock, NULL);
-    pthread_mutex_init(&program->write_lock, NULL);
-    pthread_mutex_init(&program->dead_lock, NULL);
-}
 

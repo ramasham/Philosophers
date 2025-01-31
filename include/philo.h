@@ -6,7 +6,7 @@
 /*   By: rsham <rsham@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:03:50 by rsham             #+#    #+#             */
-/*   Updated: 2025/01/29 17:45:17 by rsham            ###   ########.fr       */
+/*   Updated: 2025/01/31 19:59:31 by rsham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PHILO_H
 
 # define PHILO_MAX 200
-# include "ft_printf.h"
-# include "libft.h"
 # include <pthread.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -78,5 +76,11 @@ int					check_death(t_philo *philo);
 void				destroy_all(t_program *program, pthread_mutex_t *forks);
 int					create_philo(t_program *program, pthread_mutex_t *forks);
 void                print(char *str, t_philo *philo, int id);
+int valid_arg(char **argv);
+int only_num(char  *arg);
+int	ft_atoi(const char *str);
+
+
+
 
 #endif
