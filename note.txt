@@ -1,4 +1,0 @@
-// solve the problem
-1. create threads
-2. create shared resources
-3. 
